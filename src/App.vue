@@ -1,37 +1,60 @@
 <template>
   <div id="app">
-    <ButtonVue></ButtonVue>
-    <ButtonString></ButtonString>  <!-- Como tá no escopo global não é necessário colocar na propriedade 'components' do App -->
-    <ButtonTemplateString></ButtonTemplateString>  <!-- Como tá no escopo global não é necessário colocar na propriedade 'components' do App -->
-    <ButtonXTemplate></ButtonXTemplate>  <!-- Como tá no escopo global não é necessário colocar na propriedade 'components' do App -->
-    <ButtonInline inline-template>
-      <button @click="click">
-        Clicked ButtonInline {{ count }} times
-      </button>  
-    </ButtonInline>  <!-- Como tá no escopo global não é necessário colocar na propriedade 'components' do App -->
-    <ButtonRender></ButtonRender>  <!-- Como tá no escopo global não é necessário colocar na propriedade 'components' do App -->
-    <ButtonJSX></ButtonJSX>  <!-- Como tá no escopo global não é necessário colocar na propriedade 'components' do App -->
+    <!-- <button @click="increment(2, $event)">Click increment</button> -->
+    <!-- <button @click="firstName='New name'">New first name</button> -->
+    <button @click="fullName='Severo snape'">Set new first name </button>
+    <!-- {{ count }} -->
+    <!-- {{ fullName() }} -->
+    <!-- {{ fullNameComputed }} -->
   </div>
 </template>
 
 <script>
-  import ButtonVue from './ButtonVue.vue';
-  
+
   export default {
     name: 'App',
-    components: {
-      ButtonVue
+    data(){
+        return {
+          count: 0,
+          firstName: 'Harry',
+          lastName: 'Potter',
+        }
+    }, 
+    computed:{
+      // fullNameComputed(){
+      //   return `${this.firstName} ${this.lastName}`;
+      // },
+      fullName:{
+        get(){
+          return `${this.firstName} ${this.lastName}`;
+        },
+        set(value){
+          const [first, last] = value.split(' ');
+          this.firstName = first;
+          this.lastName = last;
+        }
+      }
+    },
+    methods:{
+      // increment(value, event){
+      //   this.count += value;
+      // },
+      // fullName(){
+      //   return `${this.firstName} ${this.lastName}`;
+      // }
+    },
+    mounted(){
     }
   }
 
 </script>
 
 <style>
-#app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
+  #app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
 </style>

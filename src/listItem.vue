@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'List-Item',
+    name: 'ListItem',
     props: {
         label: String,
         value: [String, Number]

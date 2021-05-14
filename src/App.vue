@@ -42,18 +42,29 @@
       />
     </ul>
 
+    <!-- evento customizado -->
+    <ListItem2 @increment="increment"/>
+    {{count}}
+
+    <!-- two way data binding -->
+    <input type="text" @input="text = $event.target.value" :value="text">
+    <!-- ou -->
+    <input type="text" v-model="text"> <!-- v-model é um atalho pra o de cima -->
+    {{text}}
   </div>
 </template>
 
 <script>
   import Title from './Title.vue';
   import ListItem from './listItem.vue';
+  import ListItem2 from './listItem2.vue';
 
   export default {
     name: 'App',
     components: {
       Title,
-      ListItem
+      ListItem,
+      ListItem2,
     },
     data(){
       return {
@@ -74,12 +85,20 @@
           { label: 'item 1', value: 1},
           { label: 'hello', value: 'world'},
           { label: 'harry', value: 'potter'},
-        ]
+        ],
+        count: 0,
+        text: ''
       }
     },
     computed:{
       filteredTodos(){
         return this.listTodos.filter(todo => !todo.isCompleted)
+      }
+    },
+    methods:{
+      increment(qt, event){
+        this.count+=qt;
+        console.log(event)
       }
     }
   }
